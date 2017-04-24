@@ -29,6 +29,11 @@ sudo rm /etc/motd
 sudo touch /etc/motd
 ```
 
+On non-head nodes:
+```bash
+sudo apt-get install wolfram-engine
+```
+
 On head:
 ```bash
 sudo sed -i -e '/XKBLAYOUT=/ s/=.*/="en"/' /etc/default/keyboard
