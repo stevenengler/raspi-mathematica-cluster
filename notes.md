@@ -68,6 +68,7 @@ To fix the clock (not persistent):
 $ sudo service ntp stop
 $ sudo ntpdate -s time.nist.gov
 $ sudo service ntp start
+```
 
 To search network for Pi's:
 ```bash
