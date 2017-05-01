@@ -13,6 +13,9 @@ sudo sed -i -e '/127.0.1.1/ s/raspberrypi/picluster/' /etc/hosts
 cat /dev/zero | ssh-keygen -q -N ""
 sudo -H -u student bash -c 'cat /dev/zero | ssh-keygen -q -N ""'
 #
+# Show the login screen at startup
+sudo sed -i -e 's/autologin-user=pi/#autologin-user=pi/' /etc/lightdm/lightdm.conf
+#
 # Reboot
 read -p "Press the <enter> key to reboot the computer and complete the setup..."
 sudo shutdown -r now
