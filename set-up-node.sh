@@ -23,8 +23,8 @@ sudo -H -u student bash -c "ssh-copy-id student@$NODE_IP"
 sudo sh -c "echo \"$NODE_IP\tpicluster_$NODE_ID\" >> /etc/hosts"
 #
 # Connect to the node (with both accounts) using the new hostname so that it accepts the new signature
-ssh pi@picluster_$NODE_ID 'echo done (1).'
-sudo -H -u student bash -c "ssh student@picluster_$NODE_ID 'echo done (2).'"
+ssh pi@picluster_$NODE_ID 'echo "done (1)."'
+sudo -H -u student bash -c "ssh student@picluster_$NODE_ID 'echo \"done (2).\"'"
 #
 # Restart the remote node
 echo "The node Pi will now restart. Please be patient when trying to connect to it."
