@@ -25,3 +25,6 @@ passwd
 # Create a new non-sudo user
 echo "Creating a new user named 'student'. Please choose a password..."
 sudo adduser student
+#
+# Add student to video group (needed for Mathematica)
+sudo adduser student video
