@@ -3,6 +3,7 @@ echo "Enter IP address of the node Pi:"
 read NODE_IP
 echo "Enter an integer > 0 to use as the node index:"
 read NODE_ID
+NODE_NAME=picluster-$NODE_ID
 #
 # Copy the ssh keys to the node for the pi user
 ssh-copy-id pi@$NODE_IP
@@ -12,19 +13,19 @@ scp set-up-all.sh pi@$NODE_IP:~
 ssh pi@$NODE_IP 'chmod 744 set-up-all.sh'
 ssh -tt pi@$NODE_IP './set-up-all.sh'
 ssh pi@$NODE_IP 'rm -f set-up-all.sh'
-ssh pi@$NODE_IP "sudo sh -c \"echo picluster_$NODE_ID > /etc/hostname\""
-ssh pi@$NODE_IP "sudo sed -i -e \"/127.0.1.1/ s/raspberrypi/picluster_$NODE_ID/\" /etc/hosts"
-ssh pi@$NODE_IP "sudo hostname picluster_$NODE_ID"
+ssh pi@$NODE_IP "sudo sh -c \"echo $NODE_NAME > /etc/hostname\""
+ssh pi@$NODE_IP "sudo sed -i -e \"/127.0.1.1/ s/raspberrypi/$NODE_NAME/\" /etc/hosts"
+ssh pi@$NODE_IP "sudo hostname $NODE_NAME"
 #
 # Copy the ssh keys to the node for the student user
 sudo -H -u student bash -c "ssh-copy-id student@$NODE_IP"
 #
 # Add the host name for the new node
-sudo sh -c "echo \"$NODE_IP\tpicluster_$NODE_ID\" >> /etc/hosts"
+sudo sh -c "echo \"$NODE_IP\t$NODE_NAME\" >> /etc/hosts"
 #
 # Connect to the node (with both accounts) using the new hostname so that it accepts the new signature
-ssh pi@picluster_$NODE_ID 'echo "done (1)."'
-sudo -H -u student bash -c "ssh student@picluster_$NODE_ID 'echo \"done (2).\"'"
+ssh pi@$NODE_NAME 'echo "done (1)."'
+sudo -H -u student bash -c "ssh student@$NODE_NAME 'echo \"done (2).\"'"
 #
 # Restart the remote node
 echo "The node Pi will now restart. Please be patient when trying to connect to it."
