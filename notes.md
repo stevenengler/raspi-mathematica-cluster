@@ -2,14 +2,19 @@
 
 ## Formatting the SD cards and installing Raspbian
 
-How to format an SD card and remove an existing OS: Download and use the offical SD card formatter at https://www.sdcard.org/downloads/formatter_4/
+If the SD card already has an operating system installed, you may need to format the SD card first using the offical SD card formatter at https://www.sdcard.org/downloads/formatter_4/
 
-For headless nodes: Download and image Raspbian lite.
-For main head node: Download and image Raspbian non-lite.
+For headless nodes:
+- Download Raspbian lite.  
+
+For main head node:
+- Download Raspbian with PIXEL.
+
+Install the Raspbian image on the SD card by following the instructions here: https://www.raspberrypi.org/documentation/installation/installing-images/
 
 For both:
-After imaging, create an empty file in the root of the card named 'ssh'.
-Create the file `wpa_supplicant.conf` and add the following:
+- After imaging, create an empty file in the root of the card named 'ssh' (enables ssh access).  
+- (Optional) If using Wi-Fi rather than ethernet, create the file `wpa_supplicant.conf` and add the following:
 ```
 network={
   ssid="PhysLab"
@@ -26,6 +31,10 @@ Default password for user pi: `raspberry`
 If asked to verify authenticity of a host, choose 'yes'.
 
 The process will take a while for each Pi, but you can perform the setup for multiple node Pi's at once.
+
+### Set Static IP Addresses
+
+The steps depend on your router, but you should set static IP addresses for each Pi.
 
 ### Setting up head Pi
 
